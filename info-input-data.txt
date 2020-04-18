@@ -1,0 +1,36 @@
+
+## Population counts of UN World Population Prospects 2019:
+
+1. WPP2019_INT_F03_3_POPULATION_BY_AGE_ANNUAL_FEMALE.xlsx
+2. WPP2019_INT_F03_2_POPULATION_BY_AGE_ANNUAL_MALE.xlsx
+
+URL: https://population.un.org/wpp/Download/Standard/Population/
+
+## Confirmed cases and deaths from COVID-19 of JHU CSSE:
+
+1. time_series_covid19_confirmed_global.csv
+2. time_series_covid19_deaths_global.csv
+
+URL: https://data.humdata.org/dataset/novel-coronavirus-2019-ncov-cases
+
+## File that includes ifr of a reference country, here of Verity et al. (2020, p. 17)
+
+1. infection-fatality-rates-by-age-china-Verity.txt
+
+URL: https://www.medrxiv.org/content/early/2020/03/13/2020.03.09.20033357
+
+## Abridged life tables of UN World Population Prospects 2019:
+
+1. WPP2019_MORT_F17_1_ABRIDGED_LIFE_TABLE_BOTH_SEXES.xlsx
+2. WPP2019_MORT_F17_3_ABRIDGED_LIFE_TABLE_FEMALE.xlsx 
+3. WPP2019_MORT_F17_2_ABRIDGED_LIFE_TABLE_MALE.xlsx
+
+URL: https://population.un.org/wpp/Download/Standard/Mortality/
+
+## File that includes global age distribution of COVID-19 deaths, here based on data of Dudel et al. (2020, Supplemental materials)
+
+1. global_age_dist_deaths.R
+
+URL: https://osf.io/vdgwt/
+
+
