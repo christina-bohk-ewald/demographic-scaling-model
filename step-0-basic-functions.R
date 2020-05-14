@@ -302,6 +302,7 @@ get_lambda_chronAge_globalPattern_ageSpecificDeaths <- function(deaths,global_pa
 	##
 
 	lambda_chron_x_percent_infected <- array(NA,dim = c(9,length(5:ncol(deaths)),length(countries_selected_JHU)),dimnames = list(seq(0,80,10),days_observed,countries_selected_JHU))	
+	## lambda_chron_x_percent_infected[,,1] 
 	
 	for(pop in 1:length(countries_selected_JHU)){
 	
@@ -331,12 +332,12 @@ get_lambda_chronAge_globalPattern_ageSpecificDeaths <- function(deaths,global_pa
 			current_deaths <- deaths[current_JHU_country_row,(day+4)]*global_pattern
 			lambda <- current_deaths / current_sum
 
-			lambda_thanat_x_percent_infected[,day,pop] <- lambda 
+			lambda_chron_x_percent_infected[,day,pop] <- lambda 
 
 		} ## for day	
 	} ## for pop
 	
-	return(lambda_thanat_x_percent_infected)
+	return(lambda_chron_x_percent_infected)
 } ## function
 
 ##
@@ -419,7 +420,7 @@ get_output_chronAge_globalPattern_ageSpecificDeaths <- function(lambda_chron_x_p
 	
 	output$I_x <- I_x
 	output$total_I <- total_I
-	output$lambda_x <- lambda_thanat_x_percent_infected
+	output$lambda_x <- lambda_chron_x_percent_infected
 	output$total_lambda <- total_lambda
 
 	return(output)

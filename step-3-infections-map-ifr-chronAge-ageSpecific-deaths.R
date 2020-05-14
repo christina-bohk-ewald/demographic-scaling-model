@@ -443,6 +443,164 @@ par(fig = c(0,1,0,1), las=1, mai=c(0.6,0.8,1.4,0.4))
 
 dev.off()
 
+##
+### 8. Visualize confirmed cases vs estimated infections (based on data downloaded on May 14, 2020)
+### all three (mode, high, low) together
+### wide format
+##
+
+setwd(the.plot.path)
+
+require(wesanderson)
+pal <- c(wes_palette("Darjeeling1"),wes_palette("Darjeeling2"))
+
+dev.off()
+
+pdf(file="Figure-S3.pdf", width=18, height=10, family="Times", pointsize=24, onefile=TRUE)
+
+par(fig = c(0,1,0,1), las=1, mai=c(0.6,0.0,1.2,0.2))
+
+ 	plot(x=-100,y=-100,xlim=c(0-1400,8500),ylim=c(0,10.5),xlab="",ylab="",cex.main=0.9,
+		main="Confirmed cases vs estimated infections, in thousand, as of May 13, 2020",axes=FALSE)
+
+	text(c(7250,8150),c(10.35,10.35),c("Confirmed","Estimated"),pos=3,cex=0.9,col="black",font=2)
+	text(c(7250,8150),c(10.0,10.0),c("cases","infections"),pos=3,cex=0.9,col="black",font=2)
+	text(-500,10.1,"Quantiles:",pos=4,cex=0.9,col="black",font=2)
+
+	for(pop in 1:length(countries_selected_JHU)){
+	
+		current_JHU_country <- countries_selected_JHU[pop]
+		current_JHU_country_row <- countries_selected_JHU_row[pop]
+		
+		current_pop_insert <- current_JHU_country
+		if(current_pop_insert=="US"){
+			current_pop_insert <- "United States of America" 	
+		}
+		if(current_pop_insert=="Hubei"){
+			current_pop_insert <- "China"
+		}
+		if(current_pop_insert=="Iran"){
+			current_pop_insert <- "Iran (Islamic Republic of)"
+		}
+
+			## 95% lower IFR:
+			current_confirmed <- confirmed[current_JHU_country_row,5:ncol(confirmed)]/1000
+			current_infected <- output_low95_ifr_china_map_chronAge_globalPattern_ageSpecificDeaths$total_I[pop,]/1000
+			current_infected_low <- output_up95_ifr_china_map_chronAge_globalPattern_ageSpecificDeaths$total_I[pop,]/1000
+
+			if(current_JHU_country=="Hubei"){
+				current_infected <- output_low95_ifr_china_map_chronAge_globalPattern_ageSpecificDeaths$total_I[pop,]/1000
+			}
+
+			rect(xleft=current_infected_low[length(current_infected_low)],xright=current_infected[length(current_infected)],ybottom=9.25-1*(pop-1),ytop=9.25-1*(pop-1)+0.5,col=grey(0.8))
+			text(8050,9.25-1*(pop-1)+0.05,paste(round(current_infected[length(current_infected)],0),"k)",sep=""),pos=4,col=grey(0.8),font=2,cex=0.8)
+
+			if(pop==1){
+				text(current_infected[length(current_infected)],9.25-1*(pop-1)+0.45,"0.975",pos=3,col=grey(0.8),font=2,cex=0.9)
+			}
+
+			## modal IFR:
+			current_confirmed <- confirmed[current_JHU_country_row,5:ncol(confirmed)]/1000
+			current_infected <- output_mode_ifr_china_map_chronAge_globalPattern_ageSpecificDeaths$total_I[pop,]/1000
+			current_infected_low <- output_up95_ifr_china_map_chronAge_globalPattern_ageSpecificDeaths$total_I[pop,]/1000
+
+			if(current_JHU_country=="Hubei"){
+				current_infected <- output_mode_ifr_china_map_chronAge_globalPattern_ageSpecificDeaths$total_I[pop,]/1000
+			}
+
+			rect(xleft=current_infected_low[length(current_infected_low)],xright=current_infected[length(current_infected)],ybottom=9.25-1*(pop-1),ytop=9.25-1*(pop-1)+0.5,col=grey(0.6))
+			text(7750,9.25-1*(pop-1)+0.25+0.2,paste(round(current_infected[length(current_infected)],0),"k",sep=""),pos=4,col=grey(0.6),font=2)
+
+			if(pop==1){
+				text(current_infected[length(current_infected)],9.25-1*(pop-1)+0.45,"0.5",pos=3,col=grey(0.6),font=2,cex=0.9)
+			}
+		
+			## 95% upper IFR:
+			current_confirmed <- confirmed[current_JHU_country_row,5:ncol(confirmed)]/1000
+			current_infected <- output_up95_ifr_china_map_chronAge_globalPattern_ageSpecificDeaths$total_I[pop,]/1000
+
+			if(current_JHU_country=="Hubei"){
+				current_infected <- output_up95_ifr_china_map_chronAge_globalPattern_ageSpecificDeaths$total_I[pop,]/1000
+			}
+
+			rect(xleft=current_infected[length(current_infected)],xright=current_infected[length(current_infected)],ybottom=9.25-1*(pop-1),ytop=9.25-1*(pop-1)+0.5,col=grey(0.4))
+			text(7500,9.25-1*(pop-1)+0.05,paste("(",round(current_infected[length(current_infected)],0),"k, ",sep=""),pos=4,col=grey(0.4),font=2,cex=0.8)
+
+			if(pop==1){
+				text(current_infected[length(current_infected)],9.25-1*(pop-1)+0.45,"0.025",pos=3,col=grey(0.4),font=2,cex=0.9)
+			}
+
+
+			lines(x=c(0,6900),y=rep((9.25-1*(pop-1)+0.25),2),col=pal[pop],lty=2,lwd=1)
+			rect(xleft=0,xright=confirmed[current_JHU_country_row,ncol(confirmed)]/1000,ybottom=9.15-1*(pop-1),ytop=9.15-1*(pop-1)+0.7,col=pal[pop],border=NA)
+			text(6900,9.25-1*(pop-1)+0.25,paste(round(current_confirmed[length(current_infected)],0),"k",sep=""),pos=4,col=pal[pop],font=2)
+
+	}
+
+	axis(side=1,at=seq(0,7000,500),labels=FALSE,lwd=1,pos=0)
+	axis(side=1,at=seq(0,7000,1000),labels=TRUE,lwd=3,pos=0)
+	axis(side=2,at=seq(0.5,9.5,1),labels=paste(rev(seq(1,10,1)),". ",rev(country_labels),sep=""),lwd=3,pos=0)
+
+dev.off()
+
+
+
+
+##
+### 9. Visualize population fraction infected (based on data downloaded on May 14, 2020)
+### all three (mode, high, low) together
+### wide format
+##
+
+
+setwd(the.plot.path)
+
+require(wesanderson)
+pal <- c(wes_palette("Darjeeling1"),wes_palette("Darjeeling2"))
+
+dev.off()
+
+pdf(file="Figure-S4.pdf", width=20, height=10, family="Times", pointsize=24, onefile=TRUE)
+
+	par(fig = c(0,1,0,1), las=1, mai=c(0.6,3.2,1.0,0.4))
+	plot(x=-100,y=-100,xlim=c(0,length(5:ncol(deaths))),ylim=c(0,0.08),xlab="",ylab="",cex.main=0.9,
+		main="Fraction of people probably infected with COVID-19, January 22 - May 13, 2020",axes=FALSE)
+
+	par(fig = c(0,0.35,0,1), las=1, mai=c(0.6,0.0,1.4,0.4))
+	segments(x0=rep(0,3),x1=rep(length(5:ncol(deaths)),3),y0=seq(0.01,0.08,0.01),y1=seq(0.01,0.08,0.01),lty=2,col=grey(0.8))
+ 	for(pop in c(8,5,3,1)){
+		polygon(x=c(c(1:length(5:ncol(deaths))),rev(1:length(5:ncol(deaths)))),y=c(output_up95_ifr_china_map_chronAge_globalPattern_ageSpecificDeaths$total_lambda[pop,],rev(output_low95_ifr_china_map_chronAge_globalPattern_ageSpecificDeaths$total_lambda[pop,])),border=NA,col=adjustcolor(pal[pop],alpha.f=0.2))
+		lines(x=1:length(5:ncol(deaths)),y=output_mode_ifr_china_map_chronAge_globalPattern_ageSpecificDeaths$total_lambda[pop,],col=pal[pop],lwd=3)
+	}
+	legend(0,0.08,unlist(country_labels)[c(1,3,5,8)],col=pal[c(1,3,5,8)],bty="n",lwd=2,lty=1)
+	axis(side=1,at=seq(1,length(5:ncol(deaths)),7),labels=FALSE,lwd=1,pos=0)
+	axis(side=1,at=c(seq(1,length(5:ncol(deaths)),7),length(5:ncol(deaths))),labels=str_obs_ahead_2020_selected[c(seq(1,length(5:ncol(deaths)),7),length(5:ncol(deaths)))],lwd=3,pos=0)
+	axis(side=2,at=seq(0,0.08,0.01),labels=TRUE,lwd=3,pos=0)
+
+	par(fig = c(0.32,0.67,0,1), las=1, mai=c(0.6,0.0,1.4,0.4))
+	segments(x0=rep(0,3),x1=rep(length(5:ncol(deaths)),3),y0=seq(0.01,0.08,0.01),y1=seq(0.01,0.08,0.01),lty=2,col=grey(0.8))
+ 	for(pop in c(2,4,9)){
+		polygon(x=c(c(1:length(5:ncol(deaths))),rev(1:length(5:ncol(deaths)))),y=c(output_up95_ifr_china_map_chronAge_globalPattern_ageSpecificDeaths$total_lambda[pop,],rev(output_low95_ifr_china_map_chronAge_globalPattern_ageSpecificDeaths$total_lambda[pop,])),border=NA,col=adjustcolor(pal[pop],alpha.f=0.2))
+		lines(x=1:length(5:ncol(deaths)),y=output_mode_ifr_china_map_chronAge_globalPattern_ageSpecificDeaths$total_lambda[pop,],col=pal[pop],lwd=3)
+	}
+	legend(0,0.08,unlist(country_labels)[c(2,4,9)],col=pal[c(2,4,9)],bty="n",lwd=2,lty=1)
+	axis(side=1,at=seq(1,length(5:ncol(deaths)),7),labels=FALSE,lwd=1,pos=0)
+	axis(side=1,at=c(seq(1,length(5:ncol(deaths)),7),length(5:ncol(deaths))),labels=str_obs_ahead_2020_selected[c(seq(1,length(5:ncol(deaths)),7),length(5:ncol(deaths)))],lwd=3,pos=0)
+
+	par(fig = c(0.64,0.99,0,1), las=1, mai=c(0.6,0.0,1.4,0.4))
+	segments(x0=rep(0,3),x1=rep(length(5:ncol(deaths)),3),y0=seq(0.01,0.08,0.01),y1=seq(0.01,0.08,0.01),lty=2,col=grey(0.8))
+ 	for(pop in c(6,7,10)){
+		polygon(x=c(c(1:length(5:ncol(deaths))),rev(1:length(5:ncol(deaths)))),y=c(output_up95_ifr_china_map_chronAge_globalPattern_ageSpecificDeaths$total_lambda[pop,],rev(output_low95_ifr_china_map_chronAge_globalPattern_ageSpecificDeaths$total_lambda[pop,])),border=NA,col=adjustcolor(pal[pop],alpha.f=0.2))
+		lines(x=1:length(5:ncol(deaths)),y=output_mode_ifr_china_map_chronAge_globalPattern_ageSpecificDeaths$total_lambda[pop,],col=pal[pop],lwd=3)
+	}
+	legend(0,0.08,unlist(country_labels)[c(6,7,10)],col=pal[c(6,7,10)],bty="n",lwd=2,lty=1)
+	axis(side=1,at=seq(1,length(5:ncol(deaths)),7),labels=FALSE,lwd=1,pos=0)
+	axis(side=1,at=c(seq(1,length(5:ncol(deaths)),7),length(5:ncol(deaths))),labels=str_obs_ahead_2020_selected[c(seq(1,length(5:ncol(deaths)),7),length(5:ncol(deaths)))],lwd=3,pos=0)
+
+dev.off()
+
+
+
 
 
 
