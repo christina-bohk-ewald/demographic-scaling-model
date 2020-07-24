@@ -6,7 +6,7 @@ Publication:
 
 Bohk-Ewald, C., Dudel, C., and M. Myrskylä (2020). A demographic scaling model for estimating the total number of COVID-19 infections. A preprint is available on [medRxiv](https://www.medrxiv.org/content/10.1101/2020.04.23.20077719v2), [arXiv.org](https://arxiv.org/abs/2004.12836), and [OSF](https://dx.doi.org/10.17605/OSF.IO/GQYJA).
 
-We provide here the *Latest results* as well as *How to run* the R source code to generate them.
+We provide here the **[Latest results](#latest-results)** as well as **[How to run](#how-to-run)** the R source code to generate them.
 
 ## Latest results
 
