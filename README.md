@@ -1,15 +1,17 @@
 # demographic-scaling-model
 
-`demographic-scaling-model` provides latest results and the R source code to generate them.
+The `demographic-scaling-model` is designed to estimate in a straightforward manner the total number and prevalence of COVID-19 infections for countries worldwide.  
 
 Publication: 
 
 Bohk-Ewald, C., Dudel, C., and M. Myrskylä (2020). A demographic scaling model for estimating the total number of COVID-19 infections. A preprint is available on [medRxiv](https://www.medrxiv.org/content/10.1101/2020.04.23.20077719v2), [arXiv.org](https://arxiv.org/abs/2004.12836), and [OSF](https://dx.doi.org/10.17605/OSF.IO/GQYJA).
 
+We provide here the *Latest results* as well as *How to run* the R source code to generate them.
+
 ## Latest results
 
-<p align="center"><img width=12.5% src="https://github.com/christina-bohk-ewald/demographic-scaling-model/blob/master/Figure-1.png"></p>
-
+<p align="center"><img width=100% src="https://github.com/christina-bohk-ewald/demographic-scaling-model/blob/master/Figure-1.png"></p>
+<p align="center"><img width=80% src="https://github.com/christina-bohk-ewald/demographic-scaling-model/blob/master/Figure-2.png"></p>
 
 ## How to run
 
