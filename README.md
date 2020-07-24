@@ -10,6 +10,8 @@ We provide here the *Latest results* as well as *How to run* the R source code t
 
 ## Latest results
 
+For the ten countries with most reported deaths as of July 23, 2020:
+
 <p align="center"><img width=100% src="https://github.com/christina-bohk-ewald/demographic-scaling-model/blob/master/Figure-1.png"></p>
 <p align="center"><img width=80% src="https://github.com/christina-bohk-ewald/demographic-scaling-model/blob/master/Figure-2.png"></p>
 
