@@ -1,8 +1,15 @@
 # demographic-scaling-model
 
-`demographic-scaling-model` provides the R source code used in the paper: 
+`demographic-scaling-model` provides latest results and the R source code to generate them.
+
+Publication: 
 
 Bohk-Ewald, C., Dudel, C., and M. Myrskylä (2020). A demographic scaling model for estimating the total number of COVID-19 infections. A preprint is available on [medRxiv](https://www.medrxiv.org/content/10.1101/2020.04.23.20077719v2), [arXiv.org](https://arxiv.org/abs/2004.12836), and [OSF](https://dx.doi.org/10.17605/OSF.IO/GQYJA).
+
+## Latest results
+
+<p align="center"><img width=12.5% src="https://github.com/christina-bohk-ewald/demographic-scaling-model/blob/master/Figure-1.png"></p>
+
 
 ## How to run
 
